@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SurgyStart — Surgical Intelligence Platform</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0D2B5E;--navy2:#0A2048;--navy3:#162F6A;
+  --teal:#00B4D8;--teal2:#0096B7;--teal-light:#E6F7FB;--teal-mid:#B3E8F5;
+  --dark:#0D1C2E;--mid:#4A6278;--light:#8BA3B8;
+  --bg:#F4F8FB;--white:#FFFFFF;
+  --red:#D93B3B;--red-light:#FEF0F0;
+  --amber:#E8890C;
+  --border:#DDE8F0;--border2:#C5D8E8;
+  --shadow:0 2px 12px rgba(13,43,94,.08);--shadow2:0 8px 32px rgba(13,43,94,.13);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--dark);line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:13px 52px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);box-shadow:0 1px 6px rgba(13,43,94,.06)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-mark{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:800;color:white;position:relative}
+.nav-mark::after{content:'+';position:absolute;top:1px;right:1px;font-size:9px;font-weight:900;color:var(--teal);background:white;border-radius:50%;width:12px;height:12px;display:flex;align-items:center;justify-content:center;line-height:1}
+.nav-brand{display:flex;flex-direction:column}
+.nav-name{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--navy);letter-spacing:-.3px;line-height:1.1}
+.nav-name span{color:var(--teal)}
+.nav-tagline{font-size:9px;font-weight:600;color:var(--light);letter-spacing:.6px;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:13px;font-weight:500;color:var(--mid);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--navy)}
+.nav-cta{padding:9px 22px;border-radius:8px;background:var(--navy);color:white;font-size:13px;font-weight:700;text-decoration:none;transition:all .15s}
+.nav-cta:hover{background:var(--navy2)}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;padding-top:68px}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:80px 56px 80px 64px;background:var(--white)}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:99px;background:var(--teal-light);border:1px solid var(--teal-mid);font-size:11px;font-weight:700;color:var(--teal2);letter-spacing:.8px;text-transform:uppercase;margin-bottom:24px;width:fit-content}
+.hero-tag span{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,3.2vw,50px);font-weight:800;line-height:1.08;letter-spacing:-1.5px;color:var(--navy);margin-bottom:20px}
+.hero h1 em{color:var(--teal);font-style:normal;display:block}
+.hero-sub{font-size:15px;color:var(--mid);line-height:1.75;margin-bottom:36px;max-width:440px}
+.hero-acts{display:flex;gap:12px;flex-wrap:wrap}
+.btn-p{padding:14px 26px;border-radius:10px;background:var(--navy);color:white;font-size:14px;font-weight:700;text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:8px}
+.btn-p:hover{background:var(--navy2);transform:translateY(-1px);box-shadow:0 4px 14px rgba(13,43,94,.25)}
+.btn-s{padding:14px 26px;border-radius:10px;border:1.5px solid var(--border2);background:transparent;color:var(--navy);font-size:14px;font-weight:600;text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:8px}
+.btn-s:hover{border-color:var(--teal);color:var(--teal)}
+.hero-right{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--navy) 0%,var(--navy3) 50%,#1A4A8A 100%)}
+.hero-right img{width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.6;mix-blend-mode:luminosity}
+.hero-right-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(13,43,94,.3),transparent)}
+.hero-right-badge{position:absolute;bottom:40px;left:40px;background:rgba(255,255,255,.12);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:20px 24px;color:white}
+.hrb-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:6px}
+.hrb-title{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;line-height:1.3}
+.hrb-sub{font-size:12px;color:rgba(255,255,255,.65);margin-top:4px}
+
+/* TICKER */
+.ticker{background:var(--navy);padding:12px 0;overflow:hidden}
+.ticker-inner{display:flex;animation:slide 26s linear infinite;white-space:nowrap}
+.ticker-item{display:inline-flex;align-items:center;gap:11px;padding:0 32px;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);letter-spacing:.6px;text-transform:uppercase}
+.ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--teal);flex-shrink:0}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECCIÓN PROBLEMA */
+.problema{position:relative;overflow:hidden}
+.prob-bg{position:absolute;inset:0}
+.prob-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.18) saturate(.5)}
+.prob-grad{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,43,94,.97),rgba(13,43,94,.85))}
+.prob-ct{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:88px 64px}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.prob-big{font-family:'Space Grotesk',sans-serif;font-size:clamp(44px,5.5vw,72px);font-weight:800;color:white;letter-spacing:-3px;line-height:.95;margin-bottom:16px}
+.prob-big em{color:var(--teal);font-style:normal}
+.prob-sub{font-size:15px;color:rgba(255,255,255,.6);line-height:1.72;margin-bottom:24px}
+.prob-note{background:rgba(0,180,216,.1);border:1px solid rgba(0,180,216,.22);border-radius:12px;padding:18px 22px;font-size:13px;color:rgba(255,255,255,.75);line-height:1.65}
+.prob-note strong{color:var(--teal)}
+.quotes-col{display:flex;flex-direction:column;gap:10px}
+.qpill{display:flex;align-items:center;gap:10px;padding:14px 18px;border-radius:12px;font-size:13px;font-weight:600}
+.qr{background:rgba(217,59,59,.14);border:1px solid rgba(217,59,59,.28);color:#FF8A8A}
+.qa{background:rgba(232,137,12,.11);border:1px solid rgba(232,137,12,.26);color:#F5C060}
+.qg{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6)}
+.qpill::before{content:'';width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.qr::before{background:#FF4D6A}.qa::before{background:var(--amber)}.qg::before{background:rgba(255,255,255,.35)}
+
+/* ACTORES */
+.actores-sec{background:var(--white);border-bottom:1px solid var(--border)}
+.actores-inner{max-width:1100px;margin:0 auto;padding:52px 64px}
+.actores-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(18px,1.8vw,24px);font-weight:700;color:var(--navy);text-align:center;margin-bottom:36px;letter-spacing:-.3px}
+.actores-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap}
+.actor{display:flex;flex-direction:column;align-items:center;gap:7px;padding:12px 14px}
+.actor-ico{width:46px;height:46px;border-radius:13px;background:var(--teal-light);border:1px solid var(--teal-mid);display:flex;align-items:center;justify-content:center;font-size:20px;transition:all .2s}
+.actor:hover .actor-ico{background:var(--navy);transform:translateY(-2px)}
+.actor-name{font-size:10px;font-weight:600;color:var(--mid);text-align:center}
+.a-arr{color:var(--border2);font-size:14px;align-self:center;margin-top:-16px;padding:0 3px}
+.actores-note{text-align:center;margin-top:28px;font-size:14px;color:var(--mid);max-width:680px;margin-left:auto;margin-right:auto;line-height:1.7}
+.actores-note strong{color:var(--navy)}
+
+/* MINI FEATURES */
+.features-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:16px;overflow:hidden;margin-top:36px;box-shadow:var(--shadow)}
+.feat{background:var(--white);padding:28px 24px;text-align:center}
+.feat-ico{width:48px;height:48px;border-radius:14px;background:var(--teal-light);border:1px solid var(--teal-mid);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 14px}
+.feat-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.feat-desc{font-size:12px;color:var(--mid);line-height:1.5}
+
+/* STATS */
+.stats-sec{background:var(--bg)}
+.stats-inner{max-width:1100px;margin:0 auto;padding:80px 64px}
+.sec-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-.8px;color:var(--navy);line-height:1.16;margin-bottom:14px}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:36px}
+.stat{background:var(--white);padding:36px 30px}
+.stat-n{font-family:'Space Grotesk',sans-serif;font-size:44px;font-weight:800;letter-spacing:-2px;line-height:1}
+.nr{color:var(--red)}.na{color:var(--amber)}.nt{color:var(--teal2)}
+.stat-lbl{font-size:13px;color:var(--mid);margin-top:10px;line-height:1.5}
+.stat-src{font-size:10px;color:var(--light);margin-top:7px;font-style:italic}
+.cost-hl{background:var(--navy);border-radius:18px;padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.cost-text{font-size:15px;color:rgba(255,255,255,.7);max-width:440px;line-height:1.65}
+.cost-text strong{color:white}
+.cost-nums{display:flex;gap:36px;flex-wrap:wrap;flex-shrink:0}
+.cost-n{text-align:center;border-left:2px solid rgba(0,180,216,.4);padding-left:24px}
+.cost-big{font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:800;color:var(--teal);letter-spacing:-1px;line-height:1}
+.cost-lbl{font-size:11px;color:rgba(255,255,255,.5);margin-top:6px;line-height:1.4;max-width:110px}
+
+/* SOLUCIÓN */
+.solucion-sec{background:var(--white)}
+.sol-inner{max-width:1100px;margin:0 auto;padding:88px 64px}
+.sol-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;margin-top:48px}
+.sol-img-col{display:flex;flex-direction:column;gap:12px}
+.sol-img{border-radius:16px;overflow:hidden;box-shadow:var(--shadow2)}
+.sol-img img{width:100%;object-fit:cover;display:block}
+.sol-block{background:var(--bg);border:1.5px solid var(--teal-mid);border-radius:20px;padding:40px}
+.sol-tag{display:inline-flex;align-items:center;gap:7px;background:var(--teal-light);border:1px solid var(--teal-mid);border-radius:99px;padding:5px 14px;font-size:11px;font-weight:700;color:var(--teal2);letter-spacing:.8px;text-transform:uppercase;margin-bottom:16px}
+.sol-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(18px,2vw,24px);font-weight:800;letter-spacing:-.5px;color:var(--navy);line-height:1.25;margin-bottom:13px}
+.sol-body{font-size:14px;color:var(--mid);line-height:1.78;margin-bottom:24px}
+.gains{display:flex;flex-direction:column;gap:9px}
+.gain{display:flex;align-items:flex-start;gap:11px;padding:12px 15px;background:var(--white);border:1px solid var(--teal-mid);border-radius:11px}
+.gain-ico{width:28px;height:28px;border-radius:7px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.gain-text{font-size:13px;color:var(--dark);line-height:1.55}
+.gain-text strong{color:var(--navy);font-weight:700}
+.niveles{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:48px}
+.nivel{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:26px;box-shadow:var(--shadow);transition:all .2s}
+.nivel:hover{border-color:var(--teal-mid);transform:translateY(-2px);box-shadow:var(--shadow2)}
+.nivel-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:4px 10px;border-radius:99px;margin-bottom:13px}
+.lt{background:var(--teal-light);color:var(--teal2)}
+.la{background:#FFF3E0;color:#7A4500}
+.lb{background:#EBF4FF;color:#1B6FBF}
+.nivel-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.nivel-desc{font-size:13px;color:var(--mid);line-height:1.6}
+
+/* CTA FINAL */
+.cta-sec{position:relative;overflow:hidden;min-height:500px;display:flex;align-items:center}
+.cta-bg{position:absolute;inset:0}
+.cta-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.15) saturate(.4)}
+.cta-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,43,94,.97),rgba(13,43,94,.9))}
+.cta-ct{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:80px 64px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.cta-left h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,3vw,38px);font-weight:800;color:white;letter-spacing:-1px;line-height:1.15;margin-bottom:14px}
+.cta-left h2 em{color:var(--teal);font-style:normal}
+.cta-left p{font-size:15px;color:rgba(255,255,255,.72);line-height:1.72}
+.cta-bullets{margin-top:20px;display:flex;flex-direction:column;gap:10px}
+.cbul{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.85)}
+.cbul-ico{width:22px;height:22px;border-radius:50%;background:rgba(0,180,216,.25);border:1px solid rgba(0,180,216,.4);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;color:var(--teal)}
+.cta-right{background:rgba(255,255,255,.08);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.18);border-radius:22px;padding:38px}
+.cta-right-title{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:white;margin-bottom:6px}
+.cta-right-sub{font-size:13px;color:rgba(255,255,255,.65);margin-bottom:26px;line-height:1.58}
+.cta-btn-main{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:17px 24px;border-radius:12px;background:var(--teal);color:white;font-size:15px;font-weight:800;text-decoration:none;transition:all .15s;margin-bottom:11px;font-family:'Inter',sans-serif}
+.cta-btn-main:hover{background:var(--teal2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,180,216,.3)}
+.cta-btn-sec{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:13px 24px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);color:white;font-size:13px;font-weight:600;text-decoration:none;transition:all .15s;margin-bottom:9px;font-family:'Inter',sans-serif}
+.cta-btn-sec:hover{background:rgba(255,255,255,.18)}
+.cta-note{font-size:11px;color:rgba(255,255,255,.4);text-align:center;margin-top:13px}
+
+/* TRUST BAR */
+.trust-bar{background:rgba(255,255,255,.06);border-top:1px solid rgba(255,255,255,.1);padding:16px 64px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;justify-content:center;max-width:1100px;margin:0 auto}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.5);font-weight:500}
+.trust-item-ico{font-size:16px}
+
+footer{background:var(--navy2);border-top:1px solid rgba(255,255,255,.08);padding:22px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.f-left{display:flex;align-items:center;gap:10px}
+.f-mark{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--navy3),var(--teal));display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:800;color:white}
+.f-name{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:rgba(255,255,255,.6)}
+.f-txt{font-size:11px;color:rgba(255,255,255,.25)}
+
+@media(max-width:900px){
+  nav{padding:13px 18px}.nav-links{display:none}
+  .hero{grid-template-columns:1fr}.hero-right{height:260px}.hero-left{padding:52px 24px}
+  .prob-grid,.sol-grid,.cta-ct{grid-template-columns:1fr;gap:36px}
+  .prob-ct,.actores-inner,.stats-inner,.sol-inner{padding-left:24px;padding-right:24px}
+  .cta-ct{padding:56px 24px}
+  .stats-row,.niveles,.features-row{grid-template-columns:1fr}
+  .cost-hl{flex-direction:column}.cost-nums{flex-direction:column;gap:20px}.cost-n{border-left:none;padding-left:0;border-top:1px solid rgba(0,180,216,.3);padding-top:16px}
+  .trust-bar{padding:16px 24px}
+  footer{padding:18px 24px;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-mark">S</div>
+    <div class="nav-brand">
+      <div class="nav-name">Surgy<span>Start</span></div>
+      <div class="nav-tagline">Conectamos procesos, mejoramos resultados</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#problema">El problema</a>
+    <a href="#solucion">La solución</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <a href="#contacto" class="nav-cta">Quiero saber más →</a>
+</nav>
+
+<!-- 1. HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-tag"><span></span>Surgical Intelligence Platform</div>
+    <h1>Cada quirófano ocioso<br>es un costo que<br><em>nadie recupera.</em></h1>
+    <p class="hero-sub">Coordinar una cirugía implica múltiples actores y una sola persona sosteniendo todo. SurgyStart conecta ese circuito en tiempo real — para que cada paciente llegue al quirófano listo, y el quirófano nunca quede vacío por causas evitables.</p>
+    <div class="hero-acts">
+      <a href="https://funny-lolly-d80894.netlify.app/" target="_blank" class="btn-p">Ver la plataforma →</a>
+      <a href="#contacto" class="btn-s">Quiero saber más</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="img-surgeons.jpg" alt="Equipo quirúrgico">
+    <div class="hero-right-overlay"></div>
+    <div class="hero-right-badge">
+      <div class="hrb-label">SurgyStart resuelve</div>
+      <div class="hrb-title">Agenda inteligente.<br>Cancelaciones que no ocurren.</div>
+      <div class="hrb-sub">Conectamos procesos, mejoramos resultados.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item"><span class="ticker-dot"></span>Menos tiempos ociosos</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Procesos integrados</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Mejores resultados</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Equipos conectados</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Agenda quirúrgica inteligente</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Trazabilidad clínica automática</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Menos tiempos ociosos</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Procesos integrados</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Mejores resultados</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Equipos conectados</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Agenda quirúrgica inteligente</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Trazabilidad clínica automática</span>
+  </div>
+</div>
+
+<!-- 2. EL PROBLEMA -->
+<div class="problema" id="problema">
+  <div class="prob-bg"><img src="img-or-team.jpg" alt="Quirófano"></div>
+  <div class="prob-grad"></div>
+  <div class="prob-ct">
+    <div class="prob-grid">
+      <div class="prob-left">
+        <div class="eyebrow">El desafío de la coordinación</div>
+        <div class="prob-big">Muchos<br>actores.<br><em>Un solo</em><br><em>quirófano.</em></div>
+        <p class="prob-sub" style="margin-top:16px">Para que una cirugía ocurra, todos tienen que estar listos al mismo tiempo: estudios vigentes, autorización correcta, materiales entregados, paciente preparado. Cuando uno falla, el quirófano queda vacío — y el costo fijo sigue corriendo igual.</p>
+        <div class="prob-note">La complejidad no es un defecto del sistema de salud: <strong>es su naturaleza.</strong> Hoy esa coordinación recae en personas que llaman, esperan y vuelven a llamar. Ese esfuerzo es un <strong>costo invisible</strong> que no aparece en ningún balance.</div>
+      </div>
+      <div class="quotes-col">
+        <div class="qpill qr">"Cirugía cancelada. La prótesis no llegó."</div>
+        <div class="qpill qa">"Otra vez sin respuesta del financiador."</div>
+        <div class="qpill qr">"Los estudios prequirúrgicos están incompletos."</div>
+        <div class="qpill qg">"¿El paciente sabe cómo prepararse?"</div>
+        <div class="qpill qa">"La autorización venció antes de la cirugía."</div>
+        <div class="qpill qr">"El quirófano está listo. El paciente, no."</div>
+        <div class="qpill qg">"No sé en qué estado está la autorización."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ACTORES -->
+<div class="actores-sec">
+  <div class="actores-inner">
+    <div class="actores-title">Todos los que tienen que coordinarse antes de que el bisturí se mueva</div>
+    <div class="actores-row">
+      <div class="actor"><div class="actor-ico">🩺</div><div class="actor-name">Cirujano</div></div>
+      <div class="a-arr">→</div>
+      <div class="actor"><div class="actor-ico">💉</div><div class="actor-name">Anestesista</div></div>
+      <div class="a-arr">→</div>
+      <div class="actor"><div class="actor-ico">📋</div><div class="actor-name">Gestor</div></div>
+      <div class="a-arr">→</div>
+      <div class="actor"><div class="actor-ico">🏥</div><div class="actor-name">Financiador</div></div>
+      <div class="a-arr">→</div>
+      <div class="actor"><div class="actor-ico">🦴</div><div class="actor-name">Proveedor</div></div>
+      <div class="a-arr">→</div>
+      <div class="actor"><div class="actor-ico">🧪</div><div class="actor-name">Laboratorio</div></div>
+      <div class="a-arr">→</div>
+      <div class="actor"><div class="actor-ico">🩸</div><div class="actor-name">Banco sangre</div></div>
+      <div class="a-arr">→</div>
+      <div class="actor"><div class="actor-ico">👤</div><div class="actor-name">Paciente</div></div>
+    </div>
+    <div class="actores-note">Cada uno opera con su propia lógica, su propio sistema —si lo tiene— y su propio ritmo. <strong>Hoy, coordinar todo esto depende de una o dos personas, con llamadas, WhatsApp y planillas.</strong></div>
+    <div class="features-row">
+      <div class="feat"><div class="feat-ico">⏱</div><div class="feat-title">Menos tiempos ociosos</div><div class="feat-desc">Maximizamos el uso de tus quirófanos con agenda inteligente.</div></div>
+      <div class="feat"><div class="feat-ico">🔗</div><div class="feat-title">Procesos integrados</div><div class="feat-desc">Todo en un solo lugar, sin duplicar esfuerzos ni canales.</div></div>
+      <div class="feat"><div class="feat-ico">📊</div><div class="feat-title">Mejores resultados</div><div class="feat-desc">Decisiones basadas en datos clínicos y operativos en tiempo real.</div></div>
+      <div class="feat"><div class="feat-ico">👥</div><div class="feat-title">Equipos conectados</div><div class="feat-desc">Comunicación ágil, clara y segura entre todos los actores.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. NÚMEROS -->
+<div class="stats-sec">
+  <div class="stats-inner">
+    <div class="eyebrow">El impacto de no resolverlo</div>
+    <h2 class="sec-title" style="margin-bottom:32px">Lo que cuesta cada cancelación evitable</h2>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-n nr">7,6–12%</div><div class="stat-lbl">de las cirugías electivas en Argentina se cancelan — muy por encima del estándar internacional (&lt;5%)</div><div class="stat-src">Abeldaño & Coca, 2016 · Roda, 2020</div></div>
+      <div class="stat"><div class="stat-n na">60%</div><div class="stat-lbl">de esas cancelaciones son evitables. Las causas: falta de coordinación, estudios incompletos, autorizaciones demoradas.</div><div class="stat-src">Wong et al., BMC Health Services Research, 2018</div></div>
+      <div class="stat"><div class="stat-n nt">USD 3.000</div><div class="stat-lbl">por hora de quirófano ocioso en el extremo superior. El costo fijo del bloque corre igual, haya o no cirugía.</div><div class="stat-src">Macario, J Clin Anesth, 2010</div></div>
+    </div>
+    <div class="cost-hl">
+      <div class="cost-text"><strong>Para una institución PYME con dos quirófanos activos,</strong> una tasa de cancelación del 9% implica unas 94 cirugías perdidas por año. Solo en tiempo ocioso, eso representa entre USD 94.000 y USD 282.000 anuales — por causas administrativas y de coordinación, completamente evitables.</div>
+      <div class="cost-nums">
+        <div class="cost-n"><div class="cost-big">94</div><div class="cost-lbl">cirugías perdidas por año</div></div>
+        <div class="cost-n"><div class="cost-big">+USD 100k</div><div class="cost-lbl">en valor evitable anual</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. SOLUCIÓN -->
+<div class="solucion-sec" id="solucion">
+  <div class="sol-inner">
+    <div class="eyebrow">La solución</div>
+    <h2 class="sec-title">El gestor de quirófano ahora<br>tiene un sistema a su altura.</h2>
+    <p style="font-size:15px;color:var(--mid);line-height:1.75;max-width:520px;margin-top:8px">SurgyStart centraliza en tiempo real toda la información que hoy vive dispersa. El gestor deja de perseguir datos y empieza a gestionar certezas. La agenda se construye sobre el estado real de cada paciente — no sobre una expectativa.</p>
+    <div class="sol-grid">
+      <div class="sol-img-col">
+        <div class="sol-img"><img src="img-coordinator.webp" style="height:260px" alt="Gestora de quirófano"></div>
+        <div class="sol-img"><img src="img-glove-phone.webp" style="height:185px" alt="Coordinación digital"></div>
+      </div>
+      <div class="sol-block">
+        <div class="sol-tag">✦ SurgyStart</div>
+        <div class="sol-title">Agenda inteligente.<br>Cancelaciones que no ocurren.</div>
+        <div class="sol-body">Cuando el gestor sabe sin preguntar que un estudio no llegó o que una autorización está demorada, tiene el tiempo para resolverlo antes de que se convierta en una cirugía perdida.</div>
+        <div class="gains">
+          <div class="gain"><div class="gain-ico">📅</div><div class="gain-text"><strong>Agenda diaria sin huecos evitables</strong> — construida sobre el estado real de cada paciente.</div></div>
+          <div class="gain"><div class="gain-ico">👁</div><div class="gain-text"><strong>Visibilidad anticipada</strong> — alertas con tiempo para actuar, no para lamentar.</div></div>
+          <div class="gain"><div class="gain-ico">🏦</div><div class="gain-text"><strong>Inteligencia sobre financiadores</strong> — SurgyStart sabe cuánto tarda cada uno en autorizar.</div></div>
+          <div class="gain"><div class="gain-ico">🛡</div><div class="gain-text"><strong>Trazabilidad clínica automática</strong> — profilaxis, SAMR, consentimiento, ASA. Lista para auditorías.</div></div>
+          <div class="gain"><div class="gain-ico">💬</div><div class="gain-text"><strong>Paciente preparado antes de llegar</strong> — informado por WhatsApp, sin descargar ninguna app.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="niveles">
+      <div class="nivel"><span class="nivel-tag lt">Dirección Médica</span><div class="nivel-title">Rentabilidad medible desde el primer trimestre</div><div class="nivel-desc">Cada cancelación evitada es una cirugía que sí se factura sobre un activo que ya estaba pagado.</div></div>
+      <div class="nivel"><span class="nivel-tag la">Gestor de quirófano</span><div class="nivel-title">De perseguir datos a gestionar certezas</div><div class="nivel-desc">La información llega sola. La agenda se arma con inteligencia. El gestor deja de recibir sorpresas el día de la cirugía.</div></div>
+      <div class="nivel"><span class="nivel-tag lb">Paciente</span><div class="nivel-title">Preparado, informado y seguro</div><div class="nivel-desc">Checklist, estudios, consentimiento y confirmación — todo por WhatsApp, sin instalar nada.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. CTA FINAL -->
+<div class="cta-sec" id="contacto">
+  <div class="cta-bg"><img src="img-surgeon-dark.jpg" alt=""></div>
+  <div class="cta-ov"></div>
+  <div class="cta-ct">
+    <div class="cta-left">
+      <h2>¿Querés llevar la gestión quirúrgica de tu institución<br><em>al próximo nivel?</em></h2>
+      <p>SurgyStart está en desarrollo y buscamos instituciones que quieran ser parte del proceso. Si gestionás un quirófano o dirigís una institución de salud, tu perspectiva puede dar forma a esta solución.</p>
+      <div class="cta-bullets">
+        <div class="cbul"><div class="cbul-ico">✓</div>Acceso anticipado a la plataforma</div>
+        <div class="cbul"><div class="cbul-ico">✓</div>Participación en el proceso de validación</div>
+        <div class="cbul"><div class="cbul-ico">✓</div>Condiciones especiales para early adopters</div>
+      </div>
+    </div>
+    <div class="cta-right">
+      <div class="cta-right-title">Completá el formulario y descubrí cómo SurgyStart puede ayudarte.</div>
+      <div class="cta-right-sub">Te contactamos en menos de 24 horas. Sin spam, sin compromiso.</div>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdQ69S47HWqBy1LQkgjsnvzc8CQVM3Q5DHwQCDPvm08TE6qxA/viewform" target="_blank" class="cta-btn-main">
+        📋 Acceder al formulario →
+      </a>
+      <a href="https://funny-lolly-d80894.netlify.app/" target="_blank" class="cta-btn-sec">
+        🖥 Explorar la plataforma (demo)
+      </a>
+      <a href="https://wa.me/549XXXXXXXXXX?text=Hola%2C%20vi%20SurgyStart%20y%20me%20interesa%20saber%20m%C3%A1s" target="_blank" class="cta-btn-sec">
+        💬 WhatsApp directo
+      </a>
+      <div class="cta-note">Tecnología al servicio de la salud.</div>
+    </div>
+  </div>
+  <div class="trust-bar">
+    <div class="trust-item"><span class="trust-item-ico">🔒</span>Seguridad de datos</div>
+    <div class="trust-item"><span class="trust-item-ico">☁️</span>Plataforma confiable</div>
+    <div class="trust-item"><span class="trust-item-ico">🎧</span>Soporte especializado</div>
+    <div class="trust-item"><span class="trust-item-ico">🏥</span>Diseñado para el sistema argentino</div>
+    <div class="trust-item"><span class="trust-item-ico">📋</span>Cumplimiento PNGCAM</div>
+  </div>
+</div>
+
+<footer>
+  <div class="f-left">
+    <div class="f-mark">S</div>
+    <div class="f-name">SurgyStart — Surgical Intelligence Platform</div>
+  </div>
+  <div class="f-txt">Bernia, Georgina · Boxler, Fernanda · MBA Salud · Universidad de San Andrés</div>
+</footer>
+
+</body>
+</html>
