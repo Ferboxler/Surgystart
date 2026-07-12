@@ -4,6 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SurgyStart — Surgical Intelligence Platform</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B0EW1WEKGE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B0EW1WEKGE');
+
+  // Eventos de clicks
+  function trackDemo(location) {
+    gtag('event', 'demo_click', {
+      'event_category': 'CTA',
+      'event_label': location
+    });
+  }
+  function trackForm(location) {
+    gtag('event', 'form_click', {
+      'event_category': 'CTA',
+      'event_label': location
+    });
+  }
+  function trackWhatsapp(location) {
+    gtag('event', 'whatsapp_click', {
+      'event_category': 'CTA',
+      'event_label': location
+    });
+  }
+</script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -220,7 +248,7 @@ footer{background:var(--navy2);border-top:1px solid rgba(255,255,255,.08);paddin
     <h1>Cada quirófano ocioso<br>es un costo que<br><em>nadie recupera.</em></h1>
     <p class="hero-sub">Coordinar una cirugía implica múltiples actores y una sola persona sosteniendo todo. SurgyStart conecta ese circuito en tiempo real — para que cada paciente llegue al quirófano listo, y el quirófano nunca quede vacío por causas evitables.</p>
     <div class="hero-acts">
-      <a href="https://funny-lolly-d80894.netlify.app/" target="_blank" class="btn-p">Ver la plataforma →</a>
+      <a href="https://funny-lolly-d80894.netlify.app/" target="_blank" class="btn-p" onclick="trackDemo('hero')">Ver la plataforma →</a>
       <a href="#contacto" class="btn-s">Quiero saber más</a>
     </div>
   </div>
@@ -378,13 +406,13 @@ footer{background:var(--navy2);border-top:1px solid rgba(255,255,255,.08);paddin
     <div class="cta-right">
       <div class="cta-right-title">Completá el formulario y descubrí cómo SurgyStart puede ayudarte.</div>
       <div class="cta-right-sub">Te contactamos en menos de 24 horas. Sin spam, sin compromiso.</div>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdQ69S47HWqBy1LQkgjsnvzc8CQVM3Q5DHwQCDPvm08TE6qxA/viewform" target="_blank" class="cta-btn-main">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdQ69S47HWqBy1LQkgjsnvzc8CQVM3Q5DHwQCDPvm08TE6qxA/viewform" target="_blank" class="cta-btn-main" onclick="trackForm('cta_final')">
         📋 Acceder al formulario →
       </a>
-      <a href="https://funny-lolly-d80894.netlify.app/" target="_blank" class="cta-btn-sec">
+      <a href="https://funny-lolly-d80894.netlify.app/" target="_blank" class="cta-btn-sec" onclick="trackDemo('cta_final')">
         🖥 Explorar la plataforma (demo)
       </a>
-      <a href="https://wa.me/549XXXXXXXXXX?text=Hola%2C%20vi%20SurgyStart%20y%20me%20interesa%20saber%20m%C3%A1s" target="_blank" class="cta-btn-sec">
+      <a href="https://wa.me/549XXXXXXXXXX?text=Hola%2C%20vi%20SurgyStart%20y%20me%20interesa%20saber%20m%C3%A1s" target="_blank" class="cta-btn-sec" onclick="trackWhatsapp('cta_final')">
         💬 WhatsApp directo
       </a>
       <div class="cta-note">Tecnología al servicio de la salud.</div>
